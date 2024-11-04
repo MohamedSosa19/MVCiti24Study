@@ -1,0 +1,43 @@
+﻿@model List<Instructor>
+@{
+    ViewData["Title"] = "AllInstructor";
+}
+
+<h1>Show AllInstructor</h1>
+
+<table class="table table-bordered table-striped mt-3 table-hover">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Image</td>
+            <td>Salary</td>
+            <td>Address</td>
+            <td>Department List</td>
+            <td>Course List</td>
+            <td>Action</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var instructor in Model)
+        {
+            <tr>
+                <td>@instructor.Id</td>
+                <td>@instructor.Name</td>
+                <td>
+                    <img src="~/Images/@instructor.Image" class="img-fluid" height="60px" width="60px" />
+                </td>
+                <td>@instructor.Salary</td>
+                <td>@instructor.Address </td>
+                <td>
+                   @instructor.Department.Name
+                </td>
+                <td>@instructor.Course.Name </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@instructor.Id" class="btn btn-success">ShowDetails</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

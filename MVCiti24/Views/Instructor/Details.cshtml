@@ -1,0 +1,19 @@
+﻿@model Instructor
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Instructor Details</h1>
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="~/Images/@Model.Image" alt="Card image cap">
+    <div class="card-body">
+        Name:- <h5 class="card-title">@Model.Name</h5>
+        Salary:-<h5 class="card-title">@Model.Salary</h5>
+        Address:- <h5 class="card-title">@Model.Address</h5>
+        Department:-<h5 class="card-title">@Model.Department.Name</h5>
+        Course:-<h5 class="card-title">@Model.Course.Name</h5>
+
+        <a asp-action="AllInstructor" class="btn btn-primary">Go Back</a>
+    </div>
+</div>

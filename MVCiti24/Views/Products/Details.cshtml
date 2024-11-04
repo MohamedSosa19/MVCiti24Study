@@ -1,0 +1,12 @@
+﻿@model Product
+
+
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="~/Images/@Model.ImageUlr" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="@Model.Description">@Model.Description</p>
+        
+         <a asp-action="ShowAll" class="btn btn-primary">Go Back</a>
+    </div>
+</div>
