@@ -1,0 +1,66 @@
+﻿@model InstructorWithDeptCourseList
+@{
+    ViewData["Title"] = "AddInstructor";
+}
+
+<h1>AddInstructor</h1>
+
+<form method="post" asp-action="SaveInstructor">
+    <div>
+        <label class="col-form-label">Name</label>
+        <input class="form form-control" value="@Model?.Name"  asp-for="Name"/>
+    </div>
+    <div>
+        <label class="col-form-label">Image</label>
+        <input class="form form-control" value="@Model?.Image" asp-for="Image" />
+    </div>
+    <div>
+        <label class ="col-form-label">Salary</label>
+        <input class="form form-control" value="@Model?.Salary" asp-for="Salary" />
+    </div>
+    <div>
+        <label class="col-form-label">Address</label>
+        <input class="form form-control" value="@Model?.Address" asp-for="Address" />
+    </div>
+     <div>
+        <label class="col-form-label">DepartmentId</label>
+
+        <select class="form form-control" asp-for="DepartmentId">
+            @foreach (var deptItem in Model.DeptList)
+            {
+                if (Model.DepartmentId == deptItem.Id)
+                {
+                    <option value=@deptItem.Id selected>@deptItem.Name</option>
+                }
+                else
+                {
+                    <option value=@deptItem.Id>@deptItem.Name</option>
+                }
+                
+            }
+        </select >
+    </div>
+    <div>
+        <label class="col-form-label">CourseId</label>
+        <select class="form form-control" asp-for="CourseId">
+            @foreach (var courseItem in Model.CourseList)
+            {
+                if (Model.CourseId == courseItem.Id)
+                {
+                    <option value=@courseItem.Id selected>@courseItem.Name</option>
+                }
+                else
+                {
+                    <option value=@courseItem.Id>@courseItem.Name</option>
+                }
+             
+            }
+        </select>
+    </div>
+
+    <div class="mt-3">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+   
+</form>
+

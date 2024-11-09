@@ -5,6 +5,8 @@
 
 <h1>Show AllInstructor</h1>
 
+<a class="btn btn-success" asp-action="AddInstructor" asp-controller="Instructor">Add New Instructor</a>
+
 <table class="table table-bordered table-striped mt-3 table-hover">
     <thead>
         <tr>
@@ -15,7 +17,8 @@
             <td>Address</td>
             <td>Department List</td>
             <td>Course List</td>
-            <td>Action</td>
+            <td>Details</td>
+            <td>Edit</td>
 
         </tr>
     </thead>
@@ -36,6 +39,9 @@
                 <td>@instructor.Course.Name </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@instructor.Id" class="btn btn-success">ShowDetails</a>
+                </td>
+                <td>
+                    <a asp-action="EditInstructor" asp-route-id="@instructor.Id" class="btn btn-secondary">Edit</a>
                 </td>
             </tr>
         }
