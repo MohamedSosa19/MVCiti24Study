@@ -4,6 +4,10 @@
 }
 
 <h1>Show AllInstructor</h1>
+<form method="get" asp-action="SearchInstructor" asp-controller="Instructor">
+    <input  class="form-control w-50" type="text" name="query" value="" placeholder="Enter name" />
+    <button class="btn btn-outline-info" type="submit">Search</button>
+</form>
 
 <a class="btn btn-success" asp-action="AddInstructor" asp-controller="Instructor">Add New Instructor</a>
 

@@ -117,5 +117,32 @@ namespace MVCiti24.Controllers
             instructorVM.CourseList = contectDB.Courses.ToList();
             return View("EditInstructor", instructorVM);
         }
+
+
+        public IActionResult SearchInstructor(string query)
+        {
+            List<Instructor> instructors;
+
+            if (string.IsNullOrEmpty(query))
+            {
+                // If the query is empty, return all instructors
+                instructors = contectDB.Instructors
+                    .Include(d => d.Department)
+                    .Include(c => c.Course)
+                    .ToList();
+            }
+            else
+            {
+
+                instructors = contectDB.Instructors
+                    .Include(d => d.Department)
+                    .Include(c => c.Course)
+                    .Where(i => i.Name.Contains(query))
+                    .ToList();
+            }
+
+            return View("AllInstructor", instructors);
+        }
+
     }
 }
