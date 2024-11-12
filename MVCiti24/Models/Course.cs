@@ -15,10 +15,10 @@ namespace MVCiti24.Models
         [ForeignKey("CrsResults")]
         public int? CrsResultsId { get; set; }
         //Navigational Property
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
 
-        public List<Instructor> Instructors { get; set; }
+        public List<Instructor>? Instructors { get; set; }
 
-        public CrsResults CrsResults { get; set; }
+        public CrsResults? CrsResults { get; set; }
     }
 }

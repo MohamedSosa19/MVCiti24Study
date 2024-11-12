@@ -1,0 +1,19 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Course Details</h1>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        Name:- <h5 class="card-title">@Model.Name</h5>
+        Degree:-<h5 class="card-title">@Model.Degree</h5>
+        MinDegree:- <h5 class="card-title">@Model.MinDegree</h5>
+        Department:-<h5 class="card-title">@Model.Department.Name</h5>
+        
+
+        <a asp-action="AllCourses" class="btn btn-primary">Go Back</a>
+    </div>
+</div>
+

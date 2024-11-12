@@ -1,0 +1,38 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "DeleteCourse";
+}
+
+<h1 class="alert alert-danger">Are You Sure TO Delete This Course ? </h1>
+
+
+<div >
+    <div>
+        <label class="col-form-label" asp-for="Name"></label>
+        <input class="form form-control" value="@Model?.Name" asp-for="Name" />
+    </div>
+    <div>
+        <label class="col-form-label" asp-for="Degree"></label>
+        <input class="form form-control" value="@Model?.Degree" asp-for="Degree" />
+    </div>
+    <div>
+        <label class="col-form-label" asp-for="MinDegree"></label>
+        <input class="form form-control" value="@Model?.MinDegree" asp-for="MinDegree" />
+    </div>
+    <div>
+        <label class="col-form-label" asp-for="Hour"></label>
+        <input class="form form-control" value="@Model?.Hour" asp-for="Hour" />
+    </div>
+
+
+
+</div>
+
+
+<form method="post" asp-action="Delete" class="mt-3">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="AllCourses" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
