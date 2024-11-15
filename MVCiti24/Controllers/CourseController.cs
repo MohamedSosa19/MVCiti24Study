@@ -8,6 +8,18 @@ namespace MVCiti24.Controllers
     {
         ITIContectDB contectDB = new ITIContectDB();
         private const int PageSize = 10;
+
+    
+
+        public IActionResult CheckDegree(int MinDegree, int Degree)
+        {
+            // Return false (invalid) if MinDegree is greater than Degree, true (valid) otherwise
+            if (MinDegree < Degree)
+                return Json(true);  // Valid
+            else
+                return Json(false); // Invalid
+        }
+
         public IActionResult AllCourses(int pageNumber = 1)
         {
             var totalCourses = contectDB.Courses.Count();

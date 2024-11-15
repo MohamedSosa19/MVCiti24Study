@@ -8,21 +8,26 @@
 <h1>AddCourse</h1>
 
 <form method="post" asp-action="SaveCourse">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <label class="col-form-label" asp-for="Name"></label>
         <input class="form form-control" value="@Model?.Name" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"> </span>
     </div>
     <div>
         <label class="col-form-label" asp-for="Degree"></label>
         <input class="form form-control" value="@Model?.Degree" asp-for="Degree" />
+        <span asp-validation-for="Degree" class="text-danger"></span>
     </div>
     <div>
         <label class="col-form-label" asp-for="MinDegree"></label>
         <input class="form form-control" value="@Model?.MinDegree" asp-for="MinDegree" />
+        <span asp-validation-for="MinDegree" class="text-danger"></span>
     </div>
     <div>
         <label class="col-form-label" asp-for="Hour"></label>
         <input class="form form-control" value="@Model?.Hour" asp-for="Hour" />
+        <span asp-validation-for="Hour" class="text-danger"></span>
     </div>
  
     <div>
@@ -39,4 +44,9 @@
     </div>
 
 </form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
 
