@@ -1,0 +1,30 @@
+﻿
+@model TraineeResults
+@{
+    ViewData["Title"] = "Result";
+}
+
+<h1>Results Details</h1>
+
+<table class="table table-bordered table-striped mt-3 table-hover">
+
+    <thead>
+        <tr>
+            <td>Trainee Name</td>
+            <td>Course Name</td>
+            <td>Degree</td>
+            <td>Status</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr style="background-color: @(Model.IsSuccessful ? "green" : "red"); color: white;">
+            <td>@Model.TraineeName</td>
+            <td>@Model.CourseName</td>
+            <td>@Model.Degree</td>
+            <td>@(Model.IsSuccessful ? "Success" : "Fail")</td>
+        </tr>
+    </tbody>
+    </table>
+
+
