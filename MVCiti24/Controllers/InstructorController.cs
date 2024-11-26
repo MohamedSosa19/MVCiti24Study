@@ -1,18 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCiti24.Models;
+using MVCiti24.Repositories;
 using MVCiti24.ViewModels;
+using NuGet.Protocol.Core.Types;
 
 namespace MVCiti24.Controllers
 {
     public class InstructorController : Controller
     {
 
-        ITIContectDB contectDB=new ITIContectDB();
+
+        private InstructorRepository _instructorRepository;
+        private CourseRepository _courseRepository;
+        private DepartmentRepository _departmentRepository;
+        private ITIContectDB contectDB;
+        public InstructorController(InstructorRepository instructorRepository, CourseRepository courseRepository, DepartmentRepository departmentRepository, ITIContectDB contectDB)
+        {
+            _instructorRepository = instructorRepository;
+            _courseRepository = courseRepository;
+            _departmentRepository = departmentRepository;
+            this.contectDB = contectDB;
+        }
         public IActionResult AllInstructor()
         {
-            List<Instructor> instructors = contectDB.Instructors
-                .Include(d=>d.Department).Include(c=>c.Course).ToList();
+            List<Instructor> instructors = _instructorRepository.GetAll();
             return View("AllInstructor",instructors);
         }
 
@@ -25,8 +37,8 @@ namespace MVCiti24.Controllers
 
         public IActionResult AddInstructor()
         {
-            List<Department> DepartmentList = contectDB.Departments.ToList();
-            List<Course> CoursesList = contectDB.Courses.ToList();
+            List<Department> DepartmentList = _departmentRepository.GetAll();
+            List<Course> CoursesList = _courseRepository.GetAll(); ;
             Instructor instructor = new Instructor();
             InstructorWithDeptCourseList instructorVM= new InstructorWithDeptCourseList();
             //Mapping to make VM As instructor Model
@@ -58,8 +70,8 @@ namespace MVCiti24.Controllers
                     CourseId = instructorVM.CourseId
                 };
 
-                contectDB.Instructors.Add(instructor);
-                contectDB.SaveChanges();
+                _instructorRepository.Add(instructor);
+                _instructorRepository.save();
                 return RedirectToAction("AllInstructor");
             }
 
@@ -71,8 +83,8 @@ namespace MVCiti24.Controllers
                     Console.WriteLine(error.ErrorMessage);
                 }
             }
-            instructorVM.DeptList = contectDB.Departments.ToList();
-            instructorVM.CourseList = contectDB.Courses.ToList();
+            instructorVM.DeptList = _departmentRepository.GetAll();
+            instructorVM.CourseList =_courseRepository.GetAll();
 
             return View("AddInstructor", instructorVM);
         }
@@ -80,9 +92,9 @@ namespace MVCiti24.Controllers
 
         public IActionResult EditInstructor(int Id)
         {
-            List<Department> DepartmentList = contectDB.Departments.ToList();
-            List<Course> CoursesList = contectDB.Courses.ToList();
-            Instructor instructor = contectDB.Instructors.FirstOrDefault(e => e.Id == Id);
+            List<Department> DepartmentList = _departmentRepository.GetAll();
+            List<Course> CoursesList = _courseRepository.GetAll();
+            Instructor instructor = _instructorRepository.GetById(Id);
             InstructorWithDeptCourseList instructorVM = new InstructorWithDeptCourseList();
 
             instructorVM.Id = instructor.Id;
@@ -102,7 +114,7 @@ namespace MVCiti24.Controllers
         {
             if(ModelState.IsValid)
             {
-                Instructor instructor = contectDB.Instructors.FirstOrDefault(e => e.Id == Id);
+                Instructor instructor = _instructorRepository.GetById(Id);
                 instructor.Id = instructorVM.Id;
                 instructor.Name = instructorVM.Name;
                 instructor.Image= instructorVM.Image;
@@ -110,11 +122,11 @@ namespace MVCiti24.Controllers
                 instructor.Salary= instructorVM.Salary;
                 instructor.DepartmentId= instructorVM.DepartmentId;
                 instructor.CourseId= instructorVM.CourseId;
-                contectDB.SaveChanges();
+                _instructorRepository.save();
                 return RedirectToAction("AllInstructor");
             }
-            instructorVM.DeptList = contectDB.Departments.ToList();
-            instructorVM.CourseList = contectDB.Courses.ToList();
+            instructorVM.DeptList = _departmentRepository.GetAll();
+            instructorVM.CourseList = _courseRepository.GetAll();
             return View("EditInstructor", instructorVM);
         }
 
@@ -134,11 +146,8 @@ namespace MVCiti24.Controllers
             else
             {
 
-                instructors = contectDB.Instructors
-                    .Include(d => d.Department)
-                    .Include(c => c.Course)
-                    .Where(i => i.Name.Contains(query))
-                    .ToList();
+                instructors = _instructorRepository.GetAll()
+                            .Where(i => i.Name.Contains(query)).ToList();
             }
 
             return View("AllInstructor", instructors);

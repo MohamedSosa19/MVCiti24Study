@@ -13,6 +13,15 @@ namespace MVCiti24.Models
         public DbSet<CrsResults> CrsResults { get; set; }
 
 
+        public ITIContectDB():base()
+        {
+            
+        }
+
+        public ITIContectDB(DbContextOptions options) : base(options)
+        {
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

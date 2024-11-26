@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using MVCiti24.Interface;
+using MVCiti24.Models;
+using MVCiti24.Repositories;
+
 namespace MVCiti24
 {
     public class Program
@@ -8,6 +13,15 @@ namespace MVCiti24
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<ITIContectDB>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ITI"));
+            });
+            builder.Services.AddScoped<InstructorInterface, InstructorRepository>();
+            builder.Services.AddScoped<IDepartmentInterface,DepartmentRepository>();
+            builder.Services.AddScoped<ICourseInterface, CourseRepository>();
+            
 
             var app = builder.Build();
 
