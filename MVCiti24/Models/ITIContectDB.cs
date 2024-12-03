@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace MVCiti24.Models
 {
-    public class ITIContectDB:DbContext
+    public class ITIContectDB:IdentityDbContext<ApplicationUser>
     {
         public DbSet<Department> Departments { get; set; }
         public DbSet<Instructor> Instructors { get; set; }

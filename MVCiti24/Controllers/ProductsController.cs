@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCiti24.Models;
 
 namespace MVCiti24.Controllers
 {
+
+    [Authorize]
     public class ProductsController : Controller
     {
         public IActionResult ShowAll()

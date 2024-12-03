@@ -14,13 +14,13 @@ namespace MVCiti24.Controllers
         private InstructorRepository _instructorRepository;
         private CourseRepository _courseRepository;
         private DepartmentRepository _departmentRepository;
-        private ITIContectDB contectDB;
+        private ITIContectDB _contectDB;
         public InstructorController(InstructorRepository instructorRepository, CourseRepository courseRepository, DepartmentRepository departmentRepository, ITIContectDB contectDB)
         {
             _instructorRepository = instructorRepository;
             _courseRepository = courseRepository;
             _departmentRepository = departmentRepository;
-            this.contectDB = contectDB;
+           _contectDB = contectDB;
         }
         public IActionResult AllInstructor()
         {
@@ -30,7 +30,7 @@ namespace MVCiti24.Controllers
 
         public IActionResult Details(int id)
         {
-            Instructor instructorDetails = contectDB.Instructors.Include(d=>d.Department).Include(c => c.Course).FirstOrDefault(e => e.Id == id);
+            Instructor instructorDetails = _contectDB.Instructors.Include(d=>d.Department).Include(c => c.Course).FirstOrDefault(e => e.Id == id);
                
             return View("Details", instructorDetails);
         }
@@ -138,7 +138,7 @@ namespace MVCiti24.Controllers
             if (string.IsNullOrEmpty(query))
             {
                 // If the query is empty, return all instructors
-                instructors = contectDB.Instructors
+                instructors = _contectDB.Instructors
                     .Include(d => d.Department)
                     .Include(c => c.Course)
                     .ToList();

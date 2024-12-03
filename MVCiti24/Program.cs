@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVCiti24.Interface;
 using MVCiti24.Models;
@@ -18,7 +19,17 @@ namespace MVCiti24
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ITI"));
             });
-            builder.Services.AddScoped<InstructorInterface, InstructorRepository>();
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
+                .AddEntityFrameworkStores<ITIContectDB>();
+
+            builder.Services.AddScoped<IInstructorInterface, InstructorRepository>();
             builder.Services.AddScoped<IDepartmentInterface,DepartmentRepository>();
             builder.Services.AddScoped<ICourseInterface, CourseRepository>();
             
@@ -37,7 +48,7 @@ namespace MVCiti24
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

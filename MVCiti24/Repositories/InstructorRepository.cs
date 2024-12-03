@@ -4,11 +4,10 @@ using MVCiti24.Models;
 
 namespace MVCiti24.Repositories
 {
-    public class InstructorRepository : InstructorInterface
+    public class InstructorRepository : IInstructorInterface
     {
         private readonly ITIContectDB _dbcontext;
 
-        // Constructor with dependency injection for ITIContectDB
         public InstructorRepository(ITIContectDB dbcontext)
         {
             _dbcontext = dbcontext;

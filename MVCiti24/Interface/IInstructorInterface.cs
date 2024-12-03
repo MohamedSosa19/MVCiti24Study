@@ -2,7 +2,7 @@
 
 namespace MVCiti24.Interface
 {
-    public interface InstructorInterface
+    public interface IInstructorInterface
     {
         void Add(Instructor instructor);
 
