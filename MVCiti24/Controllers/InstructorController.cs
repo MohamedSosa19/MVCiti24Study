@@ -20,12 +20,12 @@ namespace MVCiti24.Controllers
             _instructorRepository = instructorRepository;
             _courseRepository = courseRepository;
             _departmentRepository = departmentRepository;
-           _contectDB = contectDB;
+            _contectDB = contectDB;
         }
         public IActionResult AllInstructor()
         {
-            List<Instructor> instructors = _instructorRepository.GetAll();
-            return View("AllInstructor",instructors);
+            List<Instructor> instructors = _instructorRepository.GetAll().ToList(); // Materialize the query
+            return View("AllInstructor", instructors);
         }
 
         public IActionResult Details(int id)

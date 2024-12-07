@@ -29,10 +29,12 @@ namespace MVCiti24
             })
                 .AddEntityFrameworkStores<ITIContectDB>();
 
-            builder.Services.AddScoped<IInstructorInterface, InstructorRepository>();
-            builder.Services.AddScoped<IDepartmentInterface,DepartmentRepository>();
-            builder.Services.AddScoped<ICourseInterface, CourseRepository>();
-            
+            builder.Services.AddScoped<InstructorRepository>();  // Register InstructorRepository directly
+            builder.Services.AddScoped<CourseRepository>();     // Register CourseRepository
+            builder.Services.AddScoped<DepartmentRepository>(); // Register DepartmentRepository
+            builder.Services.AddScoped<ITIContectDB>();         // Register the DB context if not registered
+
+
 
             var app = builder.Build();
 

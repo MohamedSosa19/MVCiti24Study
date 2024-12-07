@@ -10,10 +10,10 @@ namespace MVCiti24.Interface
 
         void Update(Instructor instructor);
 
-        List<Instructor> GetAll();
+        //List<Instructor> GetAll();
 
         Instructor GetById(int id);
         void save();
-      
+        IQueryable<Instructor> GetAll();
     }
 }

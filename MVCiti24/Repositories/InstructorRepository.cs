@@ -24,10 +24,10 @@ namespace MVCiti24.Repositories
             _dbcontext.Remove(instr);
         }
 
-        public List<Instructor> GetAll()
-        {
-            return _dbcontext.Instructors.ToList();
-        }
+        //public List<Instructor> GetAll()
+        //{
+        //    return _dbcontext.Instructors.ToList();
+        //}
 
         public Instructor GetById(int id)
         {
@@ -43,6 +43,11 @@ namespace MVCiti24.Repositories
         {
             _dbcontext.Update(instructor);
         }
-       
+
+        public IQueryable<Instructor> GetAll()
+        {
+            return _dbcontext.Instructors.Include(i => i.Department).Include(i => i.Course);
+        }
+
     }
 }
